@@ -1,3 +1,4 @@
-<p>
-  listings works!
-</p>
+<ul *ngFor="let data of lista; let index = index">
+  <li>{{index + 1}} - {{ data[0].nombre }}</li>
+</ul>
+{{lista | json}}

@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
-import {RouterModule,Routes} from '@angular/router';
-import {AngularFireModule} from 'angularfire2';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { RouterModule, Routes } from '@angular/router';
+import { AngularFireModule } from 'angularfire2';
 
 
 
@@ -14,30 +14,30 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ListingComponent } from './components/listing/listing.component';
 import { AddListingComponent } from './components/add-listing/add-listing.component';
 import { EditListingComponent } from './components/edit-listing/edit-listing.component';
+import { FirebaseService } from 'app/services/firebase.service';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+//import { firebaseConfig } from '../environments/firebaseconetion';
 
-export const firebaseConfig={
-  apiKey: "AIzaSyCpIlaSngUlPjraFnCZwbU0DCe-yHCLLEI",
-    authDomain: "listings-42ab5.firebaseapp.com",
-    databaseURL: "https://listings-42ab5.firebaseio.com",
-    projectId: "listings-42ab5",
-    storageBucket: "",
-    messagingSenderId: "814945628598"
+const firebaseConfig = {
+  apiKey: 'AIzaSyCpIlaSngUlPjraFnCZwbU0DCe-yHCLLEI',
+  authDomain: 'listings-42ab5.firebaseapp.com',
+  databaseURL: 'https://listings-42ab5.firebaseio.com',
+  projectId: 'listings-42ab5',
+  storageBucket: '',
+  messagingSenderId: '814945628598'
 }
 
 
+const appRoutes: Routes = [
+  { path: '', component: HomeComponent },
 
+  { path: 'listings', component: ListingsComponent },
 
-const appRoutes: Routes =[
-{path:'',component:HomeComponent},
+  { path: 'add-listing', component: AddListingComponent },
 
-{path:'listings',component:ListingsComponent},
-
-{path:'add-listing',component:AddListingComponent},
-
-{path:'edit-listing',component:EditListingComponent}
+  { path: 'edit-listing', component: EditListingComponent }
 
 ]
-
 
 @NgModule({
   declarations: [
@@ -54,11 +54,12 @@ const appRoutes: Routes =[
     FormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AngularFireDatabaseModule
 
 
   ],
-  providers: [],
+  providers: [FirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
